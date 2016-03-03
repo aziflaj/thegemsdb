@@ -1,4 +1,5 @@
 require 'sinatra'
+require './stone'
 require 'sinatra/reloader' if development?
 
 # Configs
@@ -9,16 +10,35 @@ set :views, 'templates'
 # end Configs
 
 get '/hello' do
-  "Hello Aldo, I'm Frank. Nice to meet you!"
+  @name = "Aldo"
+  "Hello #{@name}, I'm Frank. Nice to meet you!"
 end
 
 get '/' do
   erb :index, layout: :layout
 end
 
+get '/gem' do
+  @gems = Stone.all
+  erb :gem
+end
+
 get '/gem/:id' do
   gem_id = params[:id]
-  "So you want to know more about the gem with id of #{gem_id}"
+  @gemstone = Stone.get(gem_id)
+  erb :single_gem
+end
+
+get 'gem/new' do
+  erb :new, layout: :layout
+end
+
+post 'gem/store' do
+  # TODO: implement this
+end
+
+get '/gem/:id/edit' do
+  # TODO: implement this
 end
 
 not_found do
