@@ -1,0 +1,5 @@
+<ul>
+  <% @gems.each do |g| %>
+    <li><a href="<%= "/gems/#{g.id}" %>"><%= g.name %></a></li>
+  <% end %>
+</ul>

@@ -18,27 +18,38 @@ get '/' do
   erb :index, layout: :layout
 end
 
-get '/gem' do
+get '/gems' do
   @gems = Stone.all
-  erb :gem
+  erb :"gems/index"
 end
 
-get '/gem/:id' do
-  gem_id = params[:id]
-  @gemstone = Stone.get(gem_id)
-  erb :single_gem
+get '/gems/new' do
+  @gemstone = Stone.new
+  erb :"gems/new"
 end
 
-get 'gem/new' do
-  erb :new, layout: :layout
+get '/gems/:id' do
+  @gemstone = Stone.get(params[:id])
+  if @gemstone
+    erb :"gems/show"
+  else
+    not_found
+  end
 end
 
-post 'gem/store' do
+post 'gems' do
+  # TODO: implement this
+  # post -> create new resource
+end
+
+get '/gems/:id/edit' do
   # TODO: implement this
 end
 
-get '/gem/:id/edit' do
-  # TODO: implement this
+put '/gems/:id' do
+end
+
+delete '/gems/:id' do
 end
 
 not_found do
