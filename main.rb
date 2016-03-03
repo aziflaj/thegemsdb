@@ -54,6 +54,8 @@ put '/gems/:id' do
 end
 
 delete '/gems/:id' do
+  Stone.get(params[:id]).destroy
+  redirect to("/gems")
 end
 
 not_found do

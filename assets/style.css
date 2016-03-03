@@ -1,3 +1,7 @@
 .gemstone {
   margin: 1em 0;
 }
+
+form.delete {
+  display: inline;
+}
