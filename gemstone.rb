@@ -3,7 +3,7 @@ require 'dm-migrations'
 
 DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
 
-class Stone
+class Gemstone
   include DataMapper::Resource
   property :id, Serial            # Serial = AutoIncrement
   property :name, String

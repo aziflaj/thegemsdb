@@ -1,5 +1,5 @@
 require 'sinatra'
-require './stone'
+require './gemstone'
 require 'sinatra/reloader' if development?
 
 # Configs
@@ -18,44 +18,44 @@ get '/' do
   erb :index, layout: :layout
 end
 
-get '/gems' do
-  @gems = Stone.all
-  erb :"gems/index"
+get '/gemstones' do
+  @gems = Gemstone.all
+  erb :"gemstones/index"
 end
 
-get '/gems/new' do
-  @gemstone = Stone.new
-  erb :"gems/new", layout: :layout
+get '/gemstones/new' do
+  @gemstone = Gemstone.new
+  erb :"gemstones/new", layout: :layout
 end
 
-get '/gems/:id' do
-  @gemstone = Stone.get(params[:id])
+get '/gemstones/:id' do
+  @gemstone = Gemstone.get(params[:id])
   if @gemstone
-    erb :"gems/show", layout: :layout
+    erb :"gemstones/show", layout: :layout
   else
     not_found
   end
 end
 
-post '/gems' do
-  @gemstone = Stone.create(params[:gemstone])
-  redirect to("/gems")
+post '/gemstones' do
+  @gemstone = Gemstone.create(params[:gemstone])
+  redirect to("/gemstones")
 end
 
-get '/gems/:id/edit' do
-  @gemstone = Stone.get(params[:id])
-  erb :"gems/edit", layout: :layout
+get '/gemstones/:id/edit' do
+  @gemstone = Gemstone.get(params[:id])
+  erb :"gemstones/edit", layout: :layout
 end
 
-put '/gems/:id' do
-  gemstone = Stone.get(params[:id])
+put '/gemstones/:id' do
+  gemstone = Gemstone.get(params[:id])
   gemstone.update(params[:gemstone])
-  redirect to("/gems/#{gemstone.id}")
+  redirect to("/gemstones/#{gemstone.id}")
 end
 
-delete '/gems/:id' do
-  Stone.get(params[:id]).destroy
-  redirect to("/gems")
+delete '/gemstones/:id' do
+  Gemstone.get(params[:id]).destroy
+  redirect to("/gemstones")
 end
 
 not_found do

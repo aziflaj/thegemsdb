@@ -1,0 +1,20 @@
+<% if @gems.count != 0 %>
+  <% @gems.each do |g| %>
+    <div class="gemstone">
+      <span class="gemstone--name">
+        <a href="<%= "/gemstones/#{g.id}" %>"><%= g.name %></a>
+      </span>
+      <a href="<%= "/gemstones/#{g.id}/edit" %>" class="btn btn-default btn-sm">Edit</a>
+      <form class="delete" action="<%= "/gemstones/#{g.id}" %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+      </form>
+    </div>
+  <% end %>
+  <div class="add-new">
+    <a href="/gemstones/new" class="btn btn-success btn-sm">Add new gem</a>
+  </div>
+<% else %>
+  <h3>No gemstones in the DB :(</h3>
+  <a href="/gemstones/new">Click here</a> to add new gemstones.
+<% end %>
