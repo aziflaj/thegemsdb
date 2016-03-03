@@ -25,13 +25,13 @@ end
 
 get '/gems/new' do
   @gemstone = Stone.new
-  erb :"gems/new"
+  erb :"gems/new", layout: :layout
 end
 
 get '/gems/:id' do
   @gemstone = Stone.get(params[:id])
   if @gemstone
-    erb :"gems/show"
+    erb :"gems/show", layout: :layout
   else
     not_found
   end
@@ -39,14 +39,18 @@ end
 
 post '/gems' do
   @gemstone = Stone.create(params[:gemstone])
-  @gemstone.name
+  redirect to("/gems")
 end
 
 get '/gems/:id/edit' do
-  # TODO: implement this
+  @gemstone = Stone.get(params[:id])
+  erb :"gems/edit", layout: :layout
 end
 
 put '/gems/:id' do
+  gemstone = Stone.get(params[:id])
+  gemstone.update(params[:gemstone])
+  redirect to("/gems/#{gemstone.id}")
 end
 
 delete '/gems/:id' do
