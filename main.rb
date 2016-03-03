@@ -3,11 +3,23 @@ require './gemstone'
 require 'sinatra/reloader' if development?
 
 # Configs
-set :bind, '0.0.0.0'
-set :port, '3000'
-set :public_folder, 'assets'
-set :views, 'templates'
-# end Configs
+configure do
+  set :bind, '0.0.0.0'
+  set :port, '3000'
+  set :public_folder, 'assets'
+  set :views, 'templates'
+end
+
+# This configuration is valid only in development
+# In a production environment, we need to set another config for DataMapper
+configure :development do
+  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+end
+
+# config for Heroku
+configure :production do
+  DataMapper.setup(:default, ENV['DATABASE_URL'])
+end
 
 get '/hello' do
   @name = "Aldo"
