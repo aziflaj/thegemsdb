@@ -37,9 +37,9 @@ get '/gems/:id' do
   end
 end
 
-post 'gems' do
-  # TODO: implement this
-  # post -> create new resource
+post '/gems' do
+  @gemstone = Stone.create(params[:gemstone])
+  @gemstone.name
 end
 
 get '/gems/:id/edit' do
