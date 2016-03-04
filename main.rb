@@ -17,9 +17,8 @@ class Website < Sinatra::Base
     DataMapper.setup(:default, ENV['DATABASE_URL'])
   end
 
-  get '/hello' do
-    @name = "Aldo"
-    "Hello #{@name}, I'm Frank. Nice to meet you!"
+  get '/hello/:name' do
+    "Hello #{params[:name]}, I'm Frank. Nice to meet you!"
   end
 
   get '/' do
