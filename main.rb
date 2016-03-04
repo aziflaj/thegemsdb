@@ -7,6 +7,16 @@ class Website < Sinatra::Base
     set :views, 'templates'
   end
 
+  # config for development
+  configure :development do
+    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+  end
+
+  # config for deployment in Heroku
+  configure :production do
+    DataMapper.setup(:default, ENV['DATABASE_URL'])
+  end
+
   get '/hello/:name' do
     "Hello #{params[:name]}, I'm Frank. Nice to meet you!"
   end
