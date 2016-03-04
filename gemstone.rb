@@ -8,6 +8,6 @@ class Gemstone
   property :description, Text
 end
 
-# Before using the Stone class, we make sure to call this method below
+# Before using the Gemstone class, we make sure to call this method below
 # to be able to use the class
 DataMapper.finalize
